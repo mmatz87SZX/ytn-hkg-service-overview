@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yantian / HKG - Ocean Service Overview</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f4f6f9;margin:0;padding:24px;color:#1a1a2e}
+.header{background:#003057;color:white;border-radius:10px;padding:24px 28px;margin-bottom:24px}
+.header h1{margin:0 0 6px 0;font-size:22px;font-weight:700}
+.header p{margin:0;font-size:13px;opacity:.75}
+.tldr{background:#e8f4fd;border-left:4px solid #0070c0;border-radius:6px;padding:14px 18px;margin-bottom:24px;font-size:13.5px;line-height:1.6}
+.tldr strong{color:#003057}
+table{width:100%;border-collapse:collapse;background:white;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08);font-size:13px}
+thead tr{background:#003057;color:white}
+th{padding:12px 14px;text-align:left;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid #eef0f3;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#f8fafc}
+.best-time{font-weight:700;font-size:14px;color:#003057}
+.service-code{font-family:'Courier New',monospace;font-size:12px;background:#f0f4ff;border:1px solid #dde4ff;padding:2px 6px;border-radius:4px;color:#3a3a8c;display:inline-block}
+.badge{display:inline-block;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600}
+.badge-direct{background:#d4edda;color:#1a7c3e}
+.badge-transfer{background:#fff3cd;color:#856404}
+.badge-inland{background:#f8d7da;color:#842029}
+.origin-ytn{color:#e84031;font-weight:600;font-size:12px}
+.origin-shk{color:#f5820d;font-weight:600;font-size:12px}
+.note{font-size:11.5px;color:#777;margin-top:3px}
+.section-header{background:#e8edf2}
+.section-header td{font-weight:700;font-size:11px;text-transform:uppercase;color:#555;padding:7px 14px}
+.footer{margin-top:20px;font-size:12px;color:#888;line-height:1.7}
+.atlas-link{color:#0070c0;text-decoration:none}
+.highlight-row td{background:#fffde7}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>Ocean Service Overview - Yantian (CNYTN) &amp; Hong Kong (HKHKG)</h1>
+<p>Data pulled from Flexport Atlas - atlas.flexport.com - As of April 10, 2026</p>
+</div>
+<div class="tldr">
+<strong>TL;DR:</strong> Yantian (CNYTN) is the stronger origin for US West Coast, US East Coast, and Europe. Shekou/Yantian area (CNSHK) is fastest for intra-Asia, India, and Oceania lanes. Hong Kong (HKHKG) averages 3-4 days slower on long-haul routes. Chicago requires intermodal via LA/LB or NY. Best direct services: <strong>ZEX</strong> (LA 13d) - <strong>TP20</strong> (NY 30d / Busan 1d) - <strong>PNW1</strong> (Vancouver 17d) - <strong>CWS</strong> (Singapore 1d / Nhava Sheva 8d).
+</div>
+<table>
+<thead><tr><th>#</th><th>Destination</th><th>LOCODE</th><th>Routes</th><th>Transit Range</th><th>Best Transit</th><th>Best Origin</th><th>Best Service</th><th>Route Type</th><th>HKG Best</th><th>Atlas Link</th></tr></thead>
+<tbody>
+<tr class="section-header"><td colspan="11">US North America - West Coast</td></tr>
+<tr class="highlight-row"><td>1</td><td><strong>Los Angeles, CA</strong></td><td>USLAX</td><td>300</td><td>13-25 days</td><td><span class="best-time">13 days</span></td><td><span class="origin-ytn">CNYTN</span></td><td><span class="service-code">ZEX</span></td><td><span class="badge badge-direct">Direct - Non-stop</span></td><td>16 days</td><td><a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USLAX" target="_blank">View</a></td></tr>
+<tr><td>2</td><td><strong>Long Beach, CA</strong></td><td>USLGB</td><td>300</td><td>13-25 days</td><td><span class="best-time">14 days</span></td><td><span class="origin-ytn">CNYTN</span></td><td><span class="service-code">Direct (+1)</span></td><td><span class="badge badge-direct">Direct</span></td><td>16 days</td><td><a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USLGB" target="_blank">View</a></td></tr>
+<tr><td>3</td><td><strong>Oakland, CA</strong></td><td>USOAK</td><td>300</td><td>19-37 days</td><td><span class="best-time">19 days</span></td><td><span class="origin-ytn">CNYTN</span></td><td><span class="service-code">JAX/Pendu</span></td><td><span class="badge badge-transfer">1 Transfer via LAX</span></td><td>--</td><td><a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USOAK" target="_blank">View</a></td></tr>
+<tr><td>4</td><td><strong>Vancouver, Canada</strong></td><td>CAVAN</td><td>300</td><td>17-44 days</td><td><span class="best-time">17 days</span></td><td><span class="origin-ytn">CNYTN</span></td><td><span class="service-code">DAS/OPNW/PNW1</span><div class="note">Evergreen, OOCL, CMA CGM</div></td><td><span class="badge badge-direct">Direct - 1 stop</span></td><td>--</td><td><a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:CAVAN" target="_blank">View</a></td></tr>
+<tr class="section-header"><td colspan="11">US North America - East Coast &amp; Inland</td></tr>
+<tr><td>5</td><td><strong>New York, NY</strong></td><td>USNYC</td><td>300</td><td>30-44 days</td><td><span class="best-time">30 days</span></td><td><span class="origin-ytn">CNYTN</span></td><td><span class="service-code">TP20</span></td><td><span class="badge badge-direct">Direct - 1 stop</span><div class="note">Alt: 30d via Panama</div></td><td>--</td><td><a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USNYC" target="_blank">View</a></td></tr>
+<tr><td>6</td><td><strong>Chicago, IL</strong></td><td>USCHI</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td><span class="badge badge-inland">Inland - No Ocean Route</span><div class="note">Via LA/LB or NY + rail</div></td><td>--</td><td>--</td></tr>
+<tr class="section-header"><td colspan="11">Europe</td></tr>
+<tr><td>7</td><td><strong>Rotterdam, Netherlands</strong></td><td>NLRTM</td><td>300</td><td>28-42 days</td><td><span class="best-time">28 days</span></td><td><span class="origin-ytn">CNYTN</span></td><td><span class="service-code">FAL8 + NEWMO</span><div class="note">Via Colombo - 1 transfer</div></td><td><span class="badge badge-transfer">1 Transfer</span><div class="note">Direct: 31 days</div></td><td>32 days</td><td><a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:NLRTM" target="_blank">View</a></td></tr>
+<tr class="section-header"><td colspan="11">Intra-Asia</td></tr>
+<tr><td>8</td><td><strong>Busan, South Korea</strong></td><td>KRPUS</td><td>300</td><td>1-10 days</td><td><span class="best-time">1 day</span></td><td><span class="origin-ytn">CNYTN</span></td><td><span class="service-code">TP20</span></td><td><span class="badge badge-direct">Direct - Non-stop</span></td><td>--</td><td><a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:KRPUS" target="_blank">View</a></td></tr>
+<tr><td>9</td><td><strong>Tokyo, Japan</strong></td><td>JPTYO</td><td>300</td><td>4-20 days</td><td><span class="best-time">4 days</span></td><td><span class="origin-shk">CNSHK</span></td><td><span class="service-code">NSC</span></td><td><span class="badge badge-direct">Direct - Non-stop</span><div class="note">From CNYTN: ~8d via transfer</div></td><td>--</td><td><a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:JPTYO" target="_blank">View</a></td></tr>
+<tr><td>10</td><td><strong>Osaka, Japan</strong></td><td>JPOSA</td><td>267</td><td>3-88 days</td><td><span class="best-time">3 days</span></td><td><span class="origin-shk">CNSHK</span></td><td><span class="service-code">JSH</span></td><td><span class="badge badge-direct">Direct - Non-stop</span><div class="note">From CNYTN: ~7d via transfer</div></td><td>--</td><td><a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:JPOSA" target="_blank">View</a></td></tr>
+<tr><td>11</td><td><strong>Singapore</strong></td><td>SGSIN</td><td>300</td><td>1-10 days</td><td><span class="best-time">1 day</span></td><td><span class="origin-shk">CNSHK</span></td><td><span class="service-code">CWS</span></td><td><span class="badge badge-direct">Direct - Non-stop</span><div class="note">From CNYTN: 3d direct</div></td><td>--</td><td><a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:SGSIN" target="_blank">View</a></td></tr>
+<tr class="section-header"><td colspan="11">Indian Subcontinent</td></tr>
+<tr><td>12</td><td><strong>Nhava Sheva, India</strong></td><td>INNSA</td><td>300</td><td>8-18 days</td><td><span class="best-time">8 days</span></td><td><span class="origin-shk">CNSHK</span></td><td><span class="service-code">CWS</span></td><td><span class="badge badge-direct">Direct - 1 stop</span></td><td>--</td><td><a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:INNSA" target="_blank">View</a></td></tr>
+<tr><td>13</td><td><strong>Chennai, India</strong></td><td>INMAA</td><td>300</td><td>8-18 days</td><td><span class="best-time">8 days</span></td><td><span class="origin-shk">CNSHK</span></td><td><span class="service-code">FIE</span></td><td><span class="badge badge-direct">Direct - Non-stop</span></td><td>--</td><td><a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:INMAA" target="_blank">View</a></td></tr>
+<tr class="section-header"><td colspan="11">Oceania</td></tr>
+<tr><td>14</td><td><strong>Auckland, New Zealand</strong></td><td>NZAKL</td><td>101</td><td>17-108 days</td><td><span class="best-time">17 days</span></td><td><span class="origin-shk">CNSHK</span></td><td><span class="service-code">ANZXANL</span></td><td><span class="badge badge-direct">Direct - 1 stop</span><div class="note">From CNYTN: 20d via Kaohsiung</div></td><td>--</td><td><a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:NZAKL" target="_blank">View</a></td></tr>
+</tbody>
+</table>
+<div class="footer">
+<strong>Origin:</strong> CNYTN=Yantian, CNSHK=Shekou (interchangeable with Yantian per Atlas), HKHKG=Hong Kong (3-4d slower on long-haul).<br>
+Chicago=inland, no ocean route. Via LB/NY+rail. Route counts capped at 300. Data: April 10, 2026.
+</div>
+</body>
+</html>
