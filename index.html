@@ -3,17 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YTN/HKG Ocean Service Overview</title>
+<title>YTN / HKG / HPH Ocean Service Overview</title>
 <style>
   :root {
-    --navy: #0a1628;
-    --navy2: #112244;
-    --accent: #2563eb;
-    --accent2: #1d4ed8;
-    --green: #16a34a;
-    --orange: #ea580c;
-    --red: #dc2626;
-    --gray: #6b7280;
+    --navy: #052439;
+    --navy2: #07304c;
+    --teal: #015F74;
+    --indigo: #566AE5;
+    --seafoam: #45DABE;
+    --terrain: #F4F2EF;
+    --mb4: #8A98A2;
     --border: #1e3a5f;
     --card-bg: #0d1f3c;
     --text: #e2e8f0;
@@ -23,25 +22,27 @@
   body { background: var(--navy); color: var(--text); font-family: 'Inter', system-ui, sans-serif; font-size: 13px; line-height: 1.5; }
 
   /* Header */
-  .header { background: linear-gradient(135deg, #0a1628 0%, #112244 60%, #1e3a5f 100%); border-bottom: 1px solid var(--border); padding: 20px 28px 16px; }
+  .header { background: linear-gradient(135deg, #052439 0%, #07304c 60%, #0d2a4a 100%); border-bottom: 1px solid var(--border); padding: 20px 28px 16px; }
   .header-top { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
-  .logo { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #2563eb; background: rgba(37,99,235,0.12); border: 1px solid rgba(37,99,235,0.3); padding: 3px 8px; border-radius: 4px; }
+  .logo { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #4397AB; background: rgba(1,95,116,0.15); border: 1px solid rgba(1,95,116,0.3); padding: 3px 8px; border-radius: 4px; }
   h1 { font-size: 22px; font-weight: 700; color: #f1f5f9; }
   .subtitle { font-size: 12px; color: var(--muted); margin-top: 2px; }
   .updated { font-size: 11px; color: #475569; margin-top: 8px; }
 
   /* TL;DR bar */
-  .tldr { background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.2); border-radius: 8px; margin: 16px 28px 0; padding: 10px 16px; display: flex; flex-wrap: wrap; gap: 16px; }
+  .tldr { background: rgba(1,95,116,0.08); border: 1px solid rgba(1,95,116,0.2); border-radius: 8px; margin: 16px 28px 0; padding: 10px 16px; display: flex; flex-wrap: wrap; gap: 16px; }
   .tldr-item { font-size: 11px; }
-  .tldr-item strong { color: #60a5fa; }
+  .tldr-item strong { color: #4397AB; }
 
   /* Legend */
   .legend { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px 28px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.01); }
   .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; }
   .badge.direct { background: rgba(22,163,74,0.18); color: #4ade80; border: 1px solid rgba(22,163,74,0.3); }
   .badge.transfer { background: rgba(234,88,12,0.18); color: #fb923c; border: 1px solid rgba(234,88,12,0.3); }
-  .badge.ytn { background: rgba(220,38,38,0.18); color: #f87171; border: 1px solid rgba(220,38,38,0.3); }
-  .badge.shk { background: rgba(234,88,12,0.18); color: #fb923c; border: 1px solid rgba(234,88,12,0.3); }
+  /* Brand-compliant POL badges */
+  .badge.ytn { background: rgba(1,95,116,0.18); color: #4397AB; border: 1px solid rgba(1,95,116,0.35); }
+  .badge.shk { background: rgba(86,106,229,0.18); color: #92A0F6; border: 1px solid rgba(86,106,229,0.35); }
+  .badge.hph { background: rgba(69,218,190,0.15); color: #45DABE; border: 1px solid rgba(69,218,190,0.3); }
   .leg-sep { font-size: 10px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
 
   /* Main layout */
@@ -57,7 +58,7 @@
   .flag { font-size: 16px; }
   .lane-name { font-size: 13px; font-weight: 600; color: #f1f5f9; }
   .locode { font-size: 10px; color: var(--muted); font-family: monospace; }
-  .atlas-link { font-size: 10px; color: #60a5fa; text-decoration: none; opacity: 0.7; }
+  .atlas-link { font-size: 10px; color: #4397AB; text-decoration: none; opacity: 0.8; }
   .atlas-link:hover { opacity: 1; }
   .no-route { padding: 16px 14px; color: var(--muted); font-size: 12px; font-style: italic; }
 
@@ -65,14 +66,26 @@
   th { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: #475569; padding: 5px 8px; text-align: left; background: rgba(255,255,255,0.01); }
   td { padding: 5px 8px; border-top: 1px solid rgba(255,255,255,0.04); vertical-align: middle; }
   tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* POL section divider row */
+  tr.pol-section td { padding: 4px 8px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #475569; background: rgba(255,255,255,0.025); border-top: 1px solid rgba(255,255,255,0.06); }
+  tr.pol-section.hph td { color: #45DABE; background: rgba(69,218,190,0.04); border-top: 1px solid rgba(69,218,190,0.15); }
+
+  /* Pending row for destinations not yet scraped */
+  tr.pending-row td { padding: 6px 14px; font-size: 11px; color: #475569; font-style: italic; }
+  tr.pending-row a { color: #4397AB; text-decoration: none; }
+  tr.pending-row a:hover { color: #45DABE; }
+
   .rank { color: #475569; font-size: 11px; font-family: monospace; width: 20px; }
   .svc { font-size: 11px; font-family: monospace; color: #93c5fd; max-width: 180px; word-break: break-word; }
   .days { font-size: 12px; font-weight: 600; color: #f1f5f9; width: 36px; }
   .via-tags { display: flex; flex-wrap: wrap; gap: 3px; }
   .via-tag { font-size: 9px; font-family: monospace; background: rgba(37,99,235,0.12); border: 1px solid rgba(37,99,235,0.25); color: #93c5fd; padding: 1px 5px; border-radius: 3px; }
   .origin-tag { font-size: 9px; font-family: monospace; font-weight: 700; padding: 2px 6px; border-radius: 3px; }
-  .origin-ytn { background: rgba(220,38,38,0.18); color: #f87171; border: 1px solid rgba(220,38,38,0.3); }
-  .origin-shk { background: rgba(234,88,12,0.18); color: #fb923c; border: 1px solid rgba(234,88,12,0.3); }
+  /* Brand-compliant origin tags */
+  .origin-ytn { background: rgba(1,95,116,0.18); color: #4397AB; border: 1px solid rgba(1,95,116,0.35); }
+  .origin-shk { background: rgba(86,106,229,0.18); color: #92A0F6; border: 1px solid rgba(86,106,229,0.35); }
+  .origin-hph { background: rgba(69,218,190,0.15); color: #45DABE; border: 1px solid rgba(69,218,190,0.3); }
   .arr-tag { font-size: 9px; font-family: monospace; background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.25); color: #6ee7b7; padding: 1px 5px; border-radius: 3px; }
 
   @media (max-width: 768px) {
@@ -90,30 +103,31 @@
   <div class="header-top">
     <span class="logo">Flexport</span>
     <div>
-      <h1>YTN / HKG Ocean Service Overview</h1>
-      <div class="subtitle">Yantian (CNYTN) &amp; Shekou (CNSHK) — up to 5 services per lane, direct &amp; transfer</div>
+      <h1>YTN / HKG / HPH Ocean Service Overview</h1>
+      <div class="subtitle">Yantian (CNYTN) Â· Shekou (CNSHK) Â· Hai Phong (VNHPH) â up to 5 services per lane, direct &amp; transfer</div>
     </div>
   </div>
-  <div class="updated">Last updated: April 10, 2026 · Source: Flexport Atlas</div>
+  <div class="updated">Last updated: April 13, 2026 Â· Source: Flexport Atlas</div>
   <div class="tldr">
-    <div class="tldr-item"><strong>14 lanes</strong> covered</div>
-    <div class="tldr-item"><strong>CNSHK ≈ CNYTN</strong> — same port cluster, ~15 min truck</div>
-    <div class="tldr-item"><strong>USCHI</strong> — inland only, no ocean routing</div>
+    <div class="tldr-item"><strong>3 POLs</strong> Â· 14 trade lanes</div>
+    <div class="tldr-item"><strong>CNSHK â CNYTN</strong> â same port cluster, ~15 min truck</div>
+    <div class="tldr-item"><strong>VNHPH</strong> â Hai Phong, Vietnam (remaining lanes loading)</div>
     <div class="tldr-item"><strong>Transit days</strong> = carrier published time from Atlas</div>
   </div>
 </div>
 
 <div class="legend">
-  <span class="badge direct">● Direct</span>
-  <span class="badge transfer">● 1 Transfer</span>
+  <span class="badge direct">â Direct</span>
+  <span class="badge transfer">â 1 Transfer</span>
   <span class="badge ytn">CNYTN</span>
   <span class="badge shk">CNSHK</span>
-  <span class="leg-sep">Multi-leg services shown as <span style="font-family:monospace;font-size:10px;background:rgba(37,99,235,0.1);padding:1px 5px;border-radius:3px;">SVC1 → SVC2</span></span>
+  <span class="badge hph">VNHPH</span>
+  <span class="leg-sep">Multi-leg services shown as <span style="font-family:monospace;font-size:10px;background:rgba(1,95,116,0.1);padding:1px 5px;border-radius:3px;">SVC1 â SVC2</span></span>
 </div>
 
 <div class="container">
 
-  <!-- ── INTRA-ASIA ── -->
+  <!-- ââ INTRA-ASIA ââ -->
   <div class="section-title">Intra-Asia</div>
   <div class="lanes">
 
@@ -121,13 +135,13 @@
     <div class="lane-card">
       <div class="lane-header">
         <div class="lane-title">
-          <span class="flag">🇯🇵</span>
+          <span class="flag">ð¯ðµ</span>
           <div>
             <div class="lane-name">Tokyo / Yokohama</div>
             <span class="locode">JPTYO</span>
           </div>
         </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:JPTYO" target="_blank">Atlas ↗</a>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:JPTYO" target="_blank">Atlas â</a>
       </div>
       <table>
         <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead>
@@ -137,6 +151,12 @@
           <tr><td class="rank">3</td><td class="svc">JTS</td><td class="days">5</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
           <tr><td class="rank">4</td><td class="svc">KTX3</td><td class="days">5</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
           <tr><td class="rank">5</td><td class="svc">CTJ</td><td class="days">6</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
+          <tr><td class="rank">1</td><td class="svc">JVH / JVHCNC</td><td class="days">6</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+          <tr><td class="rank">2</td><td class="svc">JCV</td><td class="days">8</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+          <tr><td class="rank">3</td><td class="svc">HTW â JPI / JPI1CNC</td><td class="days">8</td><td><span class="badge transfer">1 Transfer</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+          <tr><td class="rank">4</td><td class="svc">JTP â NSC</td><td class="days">9</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">CNSHK</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+          <tr><td class="rank">5</td><td class="svc">NCHH2</td><td class="days">10</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -145,19 +165,25 @@
     <div class="lane-card">
       <div class="lane-header">
         <div class="lane-title">
-          <span class="flag">🇯🇵</span>
+          <span class="flag">ð¯ðµ</span>
           <div>
             <div class="lane-name">Osaka / Kobe</div>
             <span class="locode">JPOSA</span>
           </div>
         </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:JPOSA" target="_blank">Atlas ↗</a>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:JPOSA" target="_blank">Atlas â</a>
       </div>
       <table>
         <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead>
         <tbody>
           <tr><td class="rank">1</td><td class="svc">JSH / NSA</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
           <tr><td class="rank">2</td><td class="svc">JS3 / KTX4 / JH2</td><td class="days">4</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
+          <tr><td class="rank">1</td><td class="svc">JH2</td><td class="days">6</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+          <tr><td class="rank">2</td><td class="svc">HTW â JTH</td><td class="days">7</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWTPE</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+          <tr><td class="rank">3</td><td class="svc">NCHH1</td><td class="days">8</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+          <tr><td class="rank">4</td><td class="svc">JH2 â JSH</td><td class="days">8</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">CNSHK</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+          <tr><td class="rank">5</td><td class="svc">JTP â NSA</td><td class="days">8</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">CNSHK</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -166,13 +192,13 @@
     <div class="lane-card">
       <div class="lane-header">
         <div class="lane-title">
-          <span class="flag">🇰🇷</span>
+          <span class="flag">ð°ð·</span>
           <div>
             <div class="lane-name">Busan</div>
             <span class="locode">KRPUS</span>
           </div>
         </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:KRPUS" target="_blank">Atlas ↗</a>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:KRPUS" target="_blank">Atlas â</a>
       </div>
       <table>
         <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead>
@@ -182,6 +208,12 @@
           <tr><td class="rank">3</td><td class="svc">CMI3 / KCI / RCI03</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
           <tr><td class="rank">4</td><td class="svc">FP2 / GRIFFIN</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
           <tr><td class="rank">5</td><td class="svc">KCI</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
+          <tr><td class="rank">1</td><td class="svc">HPX / RNV3</td><td class="days">2</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+          <tr><td class="rank">2</td><td class="svc">DOLPHIN</td><td class="days">6</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+          <tr><td class="rank">3</td><td class="svc">FP2 / GRIFFIN</td><td class="days">6</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+          <tr><td class="rank">4</td><td class="svc">FS1 / KCM3 / KCS / KCX</td><td class="days">6</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+          <tr><td class="rank">5</td><td class="svc">HP2</td><td class="days">7</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -190,13 +222,13 @@
     <div class="lane-card">
       <div class="lane-header">
         <div class="lane-title">
-          <span class="flag">🇸🇬</span>
+          <span class="flag">ð¸ð¬</span>
           <div>
             <div class="lane-name">Singapore</div>
             <span class="locode">SGSIN</span>
           </div>
         </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:SGSIN" target="_blank">Atlas ↗</a>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:SGSIN" target="_blank">Atlas â</a>
       </div>
       <table>
         <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead>
@@ -206,13 +238,19 @@
           <tr><td class="rank">3</td><td class="svc">AEU9 / CES / FAL8 / LL7</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
           <tr><td class="rank">4</td><td class="svc">AEU9 / CES / FAL8 / LL7</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
           <tr><td class="rank">5</td><td class="svc">AEU5 / CEM / FAL6 / LL6</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
+          <tr><td class="rank">1</td><td class="svc">HSF1CNC / NVS</td><td class="days">4</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+          <tr><td class="rank">2</td><td class="svc">NVS</td><td class="days">4</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+          <tr><td class="rank">3</td><td class="svc">CCS</td><td class="days">4</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+          <tr><td class="rank">4</td><td class="svc">SE8</td><td class="days">4</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+          <tr><td class="rank">5</td><td class="svc">SEASIA10</td><td class="days">5</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
         </tbody>
       </table>
     </div>
 
   </div>
 
-  <!-- ── INDIAN SUBCONTINENT ── -->
+  <!-- ââ INDIAN SUBCONTINENT ââ -->
   <div class="section-title">Indian Subcontinent</div>
   <div class="lanes">
 
@@ -220,53 +258,44 @@
     <div class="lane-card">
       <div class="lane-header">
         <div class="lane-title">
-          <span class="flag">🇮🇳</span>
+          <span class="flag">ðð·</span>
           <div>
             <div class="lane-name">Chennai / Madras</div>
             <span class="locode">INMAA</span>
           </div>
         </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:INMAA" target="_blank">Atlas ↗</a>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:INMAA" target="_blank">Atlas â</a>
       </div>
       <table>
         <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead>
         <tbody>
           <tr><td class="rank">1</td><td class="svc">FIE</td><td class="days">8</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
           <tr><td class="rank">2</td><td class="svc">CI7</td><td class="days">9</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr><td class="rank">3</td><td class="svc">CI7</td><td class="days">10</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr><td class="rank">4</td><td class="svc">CCX / CI3 / FCE / FCS2 / IC3</td><td class="days">11</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr><td class="rank">5</td><td class="svc">CCS</td><td class="days">12</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- India Nhava Sheva -->
-    <div class="lane-card">
-      <div class="lane-header">
-        <div class="lane-title">
-          <span class="flag">🇮🇳</span>
-          <div>
-            <div class="lane-name">Nhava Sheva / Mumbai</div>
-            <span class="locode">INNSA</span>
-          </div>
-        </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:INNSA" target="_blank">Atlas ↗</a>
-      </div>
-      <table>
+          <tr><td class="rank">3</td><td class="svc">CJV2 â FIE</td><td class="days">11</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">CNSHK</span></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+          <tr><td class="rank">4</td><td class="svc">AEUX/FAL1/LL10/NE10 -> FIE</td><td class="days">12</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">SGSIN</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+          <tr><td class="rank">5</td><td class="svc">AEU7/FAL1/LL10/NE10 -> FIE</td><td class="days">12</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">SGSIN</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
+          <tr><td class="rank">1</td><td class="svc">CI7</td><td class="days">11</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+          <tr><td class="rank">2</td><td class="svc">CCS â CVI</td><td class="days">13</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">SGSIN</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+          <tr><td class="rank">3</td><td class="svc">CJV2 <table>
         <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead>
         <tbody>
           <tr><td class="rank">1</td><td class="svc">CWS</td><td class="days">8</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
           <tr><td class="rank">2</td><td class="svc">FIM</td><td class="days">11</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
           <tr><td class="rank">3</td><td class="svc">RKI2</td><td class="days">12</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">4</td><td class="svc">CWS → CWS</td><td class="days">12</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">SGSIN</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+          <tr><td class="rank">4</td><td class="svc">CWS â CWS</td><td class="days">12</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">SGSIN</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
           <tr><td class="rank">5</td><td class="svc">AS1</td><td class="days">13</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH) â partial data</td></tr>
+          <tr><td class="rank">1</td><td class="svc">IQH â CWS</td><td class="days">13</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">CNSHK</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+          <tr><td class="rank">2</td><td class="svc">AMERICA â SHIKRA</td><td class="days">15</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">SGSIN</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+          <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:INNSA" target="_blank">More Haiphong services â Atlas â</a></td></tr>
         </tbody>
       </table>
     </div>
 
   </div>
 
-  <!-- ── US WEST COAST ── -->
+  <!-- ââ US WEST COAST ââ -->
   <div class="section-title">US West Coast</div>
   <div class="lanes">
 
@@ -274,13 +303,13 @@
     <div class="lane-card">
       <div class="lane-header">
         <div class="lane-title">
-          <span class="flag">🇺🇸</span>
+          <span class="flag">ðºð¸</span>
           <div>
             <div class="lane-name">Oakland</div>
             <span class="locode">USOAK</span>
           </div>
         </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USOAK" target="_blank">Atlas ↗</a>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USOAK" target="_blank">Atlas â</a>
       </div>
       <table>
         <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Arr.</th></tr></thead>
@@ -288,6 +317,8 @@
           <tr><td class="rank">1</td><td class="svc">JAX / Pendulum-Loop-1</td><td class="days">19</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="arr-tag">USOAK</span></td></tr>
           <tr><td class="rank">2</td><td class="svc">JAX / Pendulum-Loop-1</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="arr-tag">USOAK</span></td></tr>
           <tr><td class="rank">3</td><td class="svc">JAX / Pendulum-Loop-1</td><td class="days">20</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USOAK</span></td></tr>
+          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
+          <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:USOAK" target="_blank">Check Haiphong services â Atlas â</a></td></tr>
         </tbody>
       </table>
     </div>
@@ -296,13 +327,13 @@
     <div class="lane-card">
       <div class="lane-header">
         <div class="lane-title">
-          <span class="flag">🇺🇸</span>
+          <span class="flag">ðºð¸</span>
           <div>
             <div class="lane-name">Los Angeles</div>
             <span class="locode">USLAX</span>
           </div>
         </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USLAX" target="_blank">Atlas ↗</a>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USLAX" target="_blank">Atlas â</a>
       </div>
       <table>
         <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Arr.</th></tr></thead>
@@ -312,6 +343,8 @@
           <tr><td class="rank">3</td><td class="svc">PSX</td><td class="days">14</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
           <tr><td class="rank">4</td><td class="svc">CP2 / PVCS / SCS / SEA</td><td class="days">15</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
           <tr><td class="rank">5</td><td class="svc">AAS3 / CP4 / GEX / HTW / PCS</td><td class="days">15</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
+          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
+          <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:USLAX" target="_blank">Check Haiphong services â Atlas â</a></td></tr>
         </tbody>
       </table>
     </div>
@@ -320,13 +353,13 @@
     <div class="lane-card">
       <div class="lane-header">
         <div class="lane-title">
-          <span class="flag">🇺🇸</span>
+          <span class="flag">ðºð¸</span>
           <div>
             <div class="lane-name">Long Beach</div>
             <span class="locode">USLGB</span>
           </div>
         </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USLGB" target="_blank">Atlas ↗</a>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USLGB" target="_blank">Atlas â</a>
       </div>
       <table>
         <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Arr.</th></tr></thead>
@@ -336,13 +369,15 @@
           <tr><td class="rank">3</td><td class="svc">PSX</td><td class="days">14</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
           <tr><td class="rank">4</td><td class="svc">CP2 / PVCS / SCS / SEA</td><td class="days">15</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
           <tr><td class="rank">5</td><td class="svc">AAS3 / CP4 / GEX / HTW / PCS</td><td class="days">15</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLGB</span></td></tr>
+          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
+          <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:USLGB" target="_blank">Check Haiphong services â Atlas â</a></td></tr>
         </tbody>
       </table>
     </div>
 
   </div>
 
-  <!-- ── US EAST COAST & INLAND ── -->
+  <!-- ââ US EAST COAST & INLAND ââ -->
   <div class="section-title">US East Coast &amp; Inland</div>
   <div class="lanes">
 
@@ -350,46 +385,50 @@
     <div class="lane-card">
       <div class="lane-header">
         <div class="lane-title">
-          <span class="flag">🇺🇸</span>
+          <span class="flag">ðºð¸</span>
           <div>
             <div class="lane-name">New York / New Jersey</div>
             <span class="locode">USNYC</span>
           </div>
         </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USNYC" target="_blank">Atlas ↗</a>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USNYC" target="_blank">Atlas â</a>
       </div>
       <table>
         <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Arr.</th></tr></thead>
         <tbody>
           <tr><td class="rank">1</td><td class="svc">TP20</td><td class="days">30</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USNYC</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">AWE4 / ECX1 / SAX → AUE</td><td class="days">30</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">PAONX</span></td><td><span class="arr-tag">USNYC</span></td></tr>
+          <tr><td class="rank">2</td><td class="svc">AWE4 / ECX1 / SAX â AUE</td><td class="days">30</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">PAONX</span></td><td><span class="arr-tag">USNYC</span></td></tr>
           <tr><td class="rank">3</td><td class="svc">AWE4 / ECX1 / SAX</td><td class="days">31</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USNYC</span></td></tr>
-          <tr><td class="rank">4</td><td class="svc">AEU9 → INDAMEX</td><td class="days">33</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">LKCMB</span></td><td><span class="arr-tag">USNYC</span></td></tr>
-          <tr><td class="rank">5</td><td class="svc">TP20 → 712</td><td class="days">33</td><td><span class="badge transfer">1 Transfer</span></td><td></td><td><span class="arr-tag">USNYC</span></td></tr>
+          <tr><td class="rank">4</td><td class="svc">AEU9 â INDAMEX</td><td class="days">33</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">LKCMB</span></td><td><span class="arr-tag">USNYC</span></td></tr>
+          <tr><td class="rank">5</td><td class="svc">TP20 â 712</td><td class="days">33</td><td><span class="badge transfer">1 Transfer</span></td><td></td><td><span class="arr-tag">USNYC</span></td></tr>
+          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
+          <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:USNYC" target="_blank">Check Haiphong services â Atlas â</a></td></tr>
         </tbody>
       </table>
     </div>
 
-    <!-- US Vancouver (CAVAN) -->
+    <!-- Canada Vancouver -->
     <div class="lane-card">
       <div class="lane-header">
         <div class="lane-title">
-          <span class="flag">🇨🇦</span>
+          <span class="flag">ð¨ð¦</span>
           <div>
             <div class="lane-name">Vancouver</div>
             <span class="locode">CAVAN</span>
           </div>
         </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:CAVAN" target="_blank">Atlas ↗</a>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:CAVAN" target="_blank">Atlas â</a>
       </div>
       <table>
         <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Arr.</th></tr></thead>
         <tbody>
           <tr><td class="rank">1</td><td class="svc">DAS / OPNW / PNW1</td><td class="days">17</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">CAVAN</span></td></tr>
           <tr><td class="rank">2</td><td class="svc">PVCS / SCS / SEA</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="arr-tag">CAVAN</span></td></tr>
-          <tr><td class="rank">3</td><td class="svc">PVCS / PNW1</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="arr-tag">CAVAN</span></td></tr>
+  2       <tr><td class="rank">3</td><td class="svc">PVCS / PNW1</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="arr-tag">CAVAN</span></td></tr>
           <tr><td class="rank">4</td><td class="svc">DAS / OPNW / PNW1</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="arr-tag">CAVAN</span></td></tr>
           <tr><td class="rank">5</td><td class="svc">CAT / PNW1</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="arr-tag">CAVAN</span></td></tr>
+          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
+          <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:CAVAN" target="_blank">Check Haiphong services â Atlas â</a></td></tr>
         </tbody>
       </table>
     </div>
@@ -398,20 +437,20 @@
     <div class="lane-card">
       <div class="lane-header">
         <div class="lane-title">
-          <span class="flag">🇺🇸</span>
+          <span class="flag">ðºð¸</span>
           <div>
             <div class="lane-name">Chicago</div>
             <span class="locode">USCHI</span>
           </div>
         </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USCHI" target="_blank">Atlas ↗</a>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USCHI" target="_blank">Atlas â</a>
       </div>
-      <div class="no-route">No direct ocean routing — Chicago is served via inland intermodal from USLAX / USNYC. Check Atlas for rail/truck options.</div>
+      <div class="no-route">No direct ocean routing â Chicago is served via inland intermodal from USLAX / USNYC. Check Atlas for rail/truck options.</div>
     </div>
 
   </div>
 
-  <!-- ── EUROPE ── -->
+  <!-- ââ EUROPE ââ -->
   <div class="section-title">Europe</div>
   <div class="lanes">
 
@@ -419,29 +458,31 @@
     <div class="lane-card">
       <div class="lane-header">
         <div class="lane-title">
-          <span class="flag">🇳🇱</span>
+          <span class="flag">ð³ð±</span>
           <div>
             <div class="lane-name">Rotterdam</div>
             <span class="locode">NLRTM</span>
           </div>
         </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:NLRTM" target="_blank">Atlas ↗</a>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:NLRTM" target="_blank">Atlas â</a>
       </div>
       <table>
         <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead>
         <tbody>
-          <tr><td class="rank">1</td><td class="svc">FAL8 → NEWMO</td><td class="days">28</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">LKCMB</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">FAL8 → NEWMO</td><td class="days">30</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">LKCMB</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+          <tr><td class="rank">1</td><td class="svc">FAL8 â NEWMO</td><td class="days">28</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">LKCMB</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+          <tr><td class="rank">2</td><td class="svc">FAL8 â NEWMO</td><td class="days">30</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">LKCMB</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
           <tr><td class="rank">3</td><td class="svc">OGEU</td><td class="days">31</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
           <tr><td class="rank">4</td><td class="svc">AEU5 / CEM / FAL6 / LL6</td><td class="days">31</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">5</td><td class="svc">CIX → NEWMO</td><td class="days">31</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">LKCMB</span></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+          <tr><td class="rank">5</td><td class="svc">CIX â NEWMO</td><td class="days">31</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">LKCMB</span></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
+          <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:NLRTM" target="_blank">Check Haiphong services â Atlas â</a></td></tr>
         </tbody>
       </table>
     </div>
 
   </div>
 
-  <!-- ── OCEANIA ── -->
+  <!-- ââ OCEANIA ââ -->
   <div class="section-title">Oceania</div>
   <div class="lanes">
 
@@ -449,22 +490,24 @@
     <div class="lane-card">
       <div class="lane-header">
         <div class="lane-title">
-          <span class="flag">🇳🇿</span>
+          <span class="flag">ð³ð¿</span>
           <div>
             <div class="lane-name">Auckland</div>
             <span class="locode">NZAKL</span>
           </div>
         </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:NZAKL" target="_blank">Atlas ↗</a>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:NZAKL" target="_blank">Atlas â</a>
       </div>
       <table>
         <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead>
         <tbody>
           <tr><td class="rank">1</td><td class="svc">ANZX / ANL / CNS / NCS</td><td class="days">17</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">PVCS / SCS / SEA → ANZX / ANL / CNS</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">3</td><td class="svc">SEA → CNS</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">4</td><td class="svc">DAS / OPNW / PNW1 → CNS</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">5</td><td class="svc">KTX3 → CNS</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+          <tr><td class="rank">2</td><td class="svc">PVCS / SCS / SEA â ANZX / ANL / CNS</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+          <tr><td class="rank">3</td><td class="svc">SEA â CNS</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+          <tr><td class="rank">4</td><td class="svc">DAS / OPNW / PNW1 â CNS</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+          <tr><td class="rank">5</td><td class="svc">KTX3 â CNS</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+          <tr class="pol-section hph)><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
+          <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:NZAKL" target="_blank">Check Haiphong services â Atlas â</a></td></tr>
         </tbody>
       </table>
     </div>
