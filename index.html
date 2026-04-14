@@ -7,534 +7,395 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #052439;
-    --navy2: #07304c;
-    --teal: #015F74;
-    --indigo: #566AE5;
-    --seafoam: #45DABE;
-    --terrain: #F4F2EF;
-    --mb4: #8A98A2;
-    --border: #1e3a5f;
-    --card-bg: #0d1f3c;
-    --text: #e2e8f0;
-    --muted: #94a3b8;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--navy); color: var(--text); font-family: 'Helvetica Neue', Arial, system-ui, sans-serif; font-size: 13px; line-height: 1.5; }
-
-  /* Header */
-  .header { background: #052439; border-top: 3px solid #015F74; border-bottom: 1px solid rgba(1,95,116,0.3); padding: 20px 28px 16px; }
-  .logo-img { height: 24px; width: auto; display: block; margin-bottom: 12px; }
-  .header-top { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-  h1 { font-family: 'Cabin', 'Helvetica Neue', sans-serif; font-size: 24px; font-weight: 600; color: #ffffff; letter-spacing: -0.2px; }
-  .subtitle { font-size: 12px; color: var(--mb4); margin-top: 3px; }
-  .updated { font-size: 11px; color: var(--mb4); margin-top: 8px; }
-
-  /* TL;DR bar */
-  .tldr { background: rgba(1,95,116,0.08); border: 1px solid rgba(1,95,116,0.2); border-radius: 8px; margin: 16px 28px 0; padding: 10px 16px; display: flex; flex-wrap: wrap; gap: 16px; }
-  .tldr-item { font-size: 11px; }
-  .tldr-item strong { color: #4397AB; }
-
-  /* Legend */
-  .legend { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px 28px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.01); }
-  .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; }
-  .badge.direct { background: rgba(22,163,74,0.18); color: #4ade80; border: 1px solid rgba(22,163,74,0.3); }
-  .badge.transfer { background: rgba(234,88,12,0.18); color: #fb923c; border: 1px solid rgba(234,88,12,0.3); }
-  /* Brand-compliant POL badges */
-  .badge.ytn { background: rgba(1,95,116,0.18); color: #4397AB; border: 1px solid rgba(1,95,116,0.35); }
-  .badge.shk { background: rgba(86,106,229,0.18); color: #92A0F6; border: 1px solid rgba(86,106,229,0.35); }
-  .badge.hph { background: rgba(69,218,190,0.15); color: #45DABE; border: 1px solid rgba(69,218,190,0.3); }
-  .leg-sep { font-size: 10px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
-
-  /* Main layout */
-  .container { padding: 20px 28px 40px; max-width: 1400px; }
-  .section-title { font-family: 'Cabin', 'Helvetica Neue', sans-serif; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.8px; color: var(--teal); padding: 16px 0 8px; border-top: 1px solid rgba(1,95,116,0.25); margin-top: 8px; }
-  .section-title:first-child { border-top: none; margin-top: 0; }
-
-  .lanes { display: grid; grid-template-columns: repeat(auto-fill, minmax(580px, 1fr)); gap: 14px; margin-bottom: 4px; }
-
-  .lane-card { background: var(--card-bg); border: 1px solid rgba(1,95,116,0.22); border-radius: 8px; overflow: hidden; }
-  .lane-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: rgba(1,95,116,0.05); border-bottom: 1px solid rgba(1,95,116,0.2); }
-  .lane-title { display: flex; align-items: center; gap: 8px; }
-  .flag { font-size: 16px; }
-  .lane-name { font-family: 'Cabin', 'Helvetica Neue', sans-serif; font-size: 13px; font-weight: 600; color: #ffffff; }
-  .locode { font-size: 10px; color: var(--muted); font-family: monospace; }
-  .atlas-link { font-size: 10px; color: #4397AB; text-decoration: none; opacity: 0.8; }
-  .atlas-link:hover { opacity: 1; }
-  .no-route { padding: 16px 14px; color: var(--muted); font-size: 12px; font-style: italic; }
-
-  table { width: 100%; border-collapse: collapse; }
-  th { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--mb4); padding: 5px 8px; text-align: left; background: rgba(255,255,255,0.01); }
-  td { padding: 5px 8px; border-top: 1px solid rgba(255,255,255,0.04); vertical-align: middle; }
-  tr:hover td { background: rgba(255,255,255,0.02); }
-
-  /* POL section divider row */
-  tr.pol-section td { padding: 4px 8px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #475569; background: rgba(255,255,255,0.025); border-top: 1px solid rgba(255,255,255,0.06); }
-  tr.pol-section.hph td { color: #45DABE; background: rgba(69,218,190,0.04); border-top: 1px solid rgba(69,218,190,0.15); }
-
-  /* Pending row for destinations not yet scraped */
-  tr.pending-row td { padding: 6px 14px; font-size: 11px; color: #475569; font-style: italic; }
-  tr.pending-row a { color: #4397AB; text-decoration: none; }
-  tr.pending-row a:hover { color: #45DABE; }
-
-  .rank { color: var(--mb4); font-size: 11px; font-family: monospace; width: 20px; }
-  .svc { font-size: 11px; font-family: monospace; color: #7CBDCC; max-width: 180px; word-break: break-word; }
-  .days { font-size: 12px; font-weight: 600; color: #f1f5f9; width: 36px; }
-  .via-tags { display: flex; flex-wrap: wrap; gap: 3px; }
-  .via-tag { font-size: 9px; font-family: monospace; background: rgba(86,106,229,0.12); border: 1px solid rgba(86,106,229,0.25); color: #92A0F6; padding: 1px 5px; border-radius: 3px; }
-  .origin-tag { font-size: 9px; font-family: monospace; font-weight: 700; padding: 2px 6px; border-radius: 3px; }
-  /* Brand-compliant origin tags */
-  .origin-ytn { background: rgba(1,95,116,0.18); color: #4397AB; border: 1px solid rgba(1,95,116,0.35); }
-  .origin-shk { background: rgba(86,106,229,0.18); color: #92A0F6; border: 1px solid rgba(86,106,229,0.35); }
-  .origin-hph { background: rgba(69,218,190,0.15); color: #45DABE; border: 1px solid rgba(69,218,190,0.3); }
-  .arr-tag { font-size: 9px; font-family: monospace; background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.25); color: #6ee7b7; padding: 1px 5px; border-radius: 3px; }
-
-  @media (max-width: 768px) {
-    .lanes { grid-template-columns: 1fr; }
-    .header { padding: 14px 16px; }
-    .container { padding: 14px 16px 32px; }
-    .legend { padding: 10px 16px; }
-    .tldr { margin: 12px 16px 0; }
-  }
+:root {
+  --midnight: #052439;
+  --teal:     #015F74;
+  --teal-mid: #4397AB;
+  --seafoam:  #45DABE;
+  --indigo:   #566AE5;
+  --terrain:  #F4F2EF;
+  --mb4:      #8A98A2;
+  --mb5:      #607480;
+  --mb2:      #E5E8EA;
+  --sky:      #5EB6F1;
+  --white:    #FFFFFF;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--white); color: var(--midnight); font-family: "Helvetica Neue", Arial, sans-serif; font-size: 13px; line-height: 1.5; }
+.header { background: var(--midnight); border-bottom: 3px solid var(--teal); padding: 24px 36px 20px; }
+.header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.logo-img { height: 22px; width: auto; display: block; margin-bottom: 14px; }
+h1 { font-family: "Cabin", "Helvetica Neue", sans-serif; font-size: 22px; font-weight: 600; color: #FFFFFF; letter-spacing: -0.2px; line-height: 1.25; }
+.subtitle { font-size: 12px; color: var(--mb4); margin-top: 4px; }
+.updated { font-size: 11px; color: var(--mb4); margin-top: 16px; white-space: nowrap; text-align: right; }
+.meta-bar { background: #fff; border-bottom: 1px solid var(--mb2); padding: 10px 36px; }
+.meta-inner { max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 24px; }
+.meta-item { font-size: 11px; color: var(--mb5); }
+.meta-item strong { color: var(--teal); font-weight: 700; }
+.key-bar { background: var(--terrain); border-bottom: 1px solid var(--mb2); padding: 9px 36px; }
+.key-inner { max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
+.key-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--mb5); }
+.key-items { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1; }
+.badge.direct { background: var(--teal); color: #fff; }
+.badge.transfer { background: var(--midnight); color: #fff; }
+.badge.pol-ytn { background: rgba(1,95,116,0.1); color: var(--teal); border: 1px solid rgba(1,95,116,0.3); }
+.badge.pol-shk { background: rgba(86,106,229,0.1); color: #4555B7; border: 1px solid rgba(86,106,229,0.3); }
+.badge.pol-hph { background: rgba(69,218,190,0.1); color: #1D5A4F; border: 1px solid rgba(69,218,190,0.35); }
+.key-note { font-size: 11px; color: var(--mb5); padding-left: 8px; border-left: 2px solid var(--mb2); }
+.key-note code { font-family: monospace; background: var(--mb2); padding: 1px 5px; border-radius: 2px; font-size: 10px; color: var(--midnight); }
+.container { max-width: 1400px; margin: 0 auto; padding: 28px 36px 56px; }
+.section-title { display: flex; align-items: center; gap: 10px; font-family: "Cabin", "Helvetica Neue", sans-serif; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--teal); padding: 28px 0 12px; border-top: 1px solid var(--mb2); margin-top: 12px; }
+.section-title:first-child { border-top: none; margin-top: 0; padding-top: 0; }
+.section-title::before { content: ""; display: block; width: 3px; height: 14px; background: var(--teal); border-radius: 1px; flex-shrink: 0; }
+.lanes { display: grid; grid-template-columns: repeat(auto-fill, minmax(560px, 1fr)); gap: 16px; margin-bottom: 8px; }
+.lane-card { background: #fff; border: 1px solid var(--mb2); border-radius: 6px; overflow: hidden; box-shadow: 0 1px 3px rgba(5,36,57,0.06); }
+.lane-header { display: flex; align-items: center; justify-content: space-between; padding: 11px 16px; background: var(--midnight); border-bottom: 2px solid var(--teal); }
+.lane-title { display: flex; align-items: center; gap: 10px; }
+.flag { font-size: 15px; line-height: 1; }
+.lane-name { font-family: "Cabin", "Helvetica Neue", sans-serif; font-size: 13px; font-weight: 600; color: #FFFFFF; line-height: 1.2; }
+.locode { font-size: 10px; color: var(--mb4); font-family: monospace; margin-top: 1px; display: block; }
+.atlas-link { font-size: 10px; font-weight: 600; color: var(--sky); text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.85; white-space: nowrap; }
+.atlas-link:hover { opacity: 1; text-decoration: underline; }
+table { width: 100%; border-collapse: collapse; }
+thead tr { background: var(--terrain); border-bottom: 1px solid var(--mb2); }
+th { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--mb5); padding: 6px 10px; text-align: left; }
+tbody tr { border-bottom: 1px solid var(--mb2); }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:nth-child(even) { background: #FAFAF9; }
+tbody tr:hover { background: rgba(1,95,116,0.04); }
+td { padding: 6px 10px; vertical-align: middle; }
+tr.pol-section td { padding: 5px 10px; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--mb5); background: var(--terrain); border-top: 2px solid var(--mb2); border-bottom: 1px solid var(--mb2); }
+tr.pol-section.hph td { color: #1D5A4F; background: rgba(69,218,190,0.06); border-top-color: rgba(69,218,190,0.25); }
+tr.pending-row td { padding: 7px 10px; font-size: 11px; color: var(--mb5); font-style: italic; background: var(--terrain); }
+tr.pending-row a { color: var(--teal); text-decoration: none; font-style: normal; font-weight: 600; }
+tr.pending-row a:hover { text-decoration: underline; }
+.no-route { padding: 18px 16px; font-size: 12px; color: var(--mb5); font-style: italic; background: var(--terrain); }
+.rank { color: var(--mb4); font-size: 11px; font-family: monospace; width: 22px; text-align: right; }
+.svc { font-size: 11px; font-family: monospace; color: var(--midnight); max-width: 200px; word-break: break-word; }
+.days { font-size: 12px; font-weight: 700; color: var(--midnight); width: 36px; text-align: center; }
+.via-tags { display: flex; flex-wrap: wrap; gap: 3px; }
+.via-tag { font-size: 9px; font-family: monospace; background: rgba(86,106,229,0.1); border: 1px solid rgba(86,106,229,0.2); color: #4555B7; padding: 1px 5px; border-radius: 3px; }
+.origin-tag { font-size: 9px; font-family: monospace; font-weight: 700; padding: 2px 6px; border-radius: 3px; }
+.origin-ytn { background: rgba(1,95,116,0.1); color: var(--teal); border: 1px solid rgba(1,95,116,0.25); }
+.origin-shk { background: rgba(86,106,229,0.1); color: #4555B7; border: 1px solid rgba(86,106,229,0.25); }
+.origin-hph { background: rgba(69,218,190,0.1); color: #1D5A4F; border: 1px solid rgba(69,218,190,0.3); }
+.arr-tag { font-size: 9px; font-family: monospace; font-weight: 700; padding: 2px 6px; border-radius: 3px; background: rgba(1,95,116,0.1); color: var(--teal); border: 1px solid rgba(1,95,116,0.25); }
+.page-footer { max-width: 1400px; margin: 0 auto; padding: 16px 36px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--mb2); }
+.footer-logo { height: 16px; width: auto; opacity: 0.45; }
+.footer-text { font-size: 10px; color: var(--mb4); }
+@media (max-width: 800px) {
+  .lanes { grid-template-columns: 1fr; }
+  .header, .container, .meta-bar, .key-bar, .page-footer { padding-left: 20px; padding-right: 20px; }
+}
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="header-top">
-    <img class="logo-img" src="data:image/png;base64,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" alt="Flexport" height="24">
+  <div class="header-inner">
     <div>
+      <img class="logo-img" src="data:image/png;base64,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" alt="Flexport">
       <h1>YTN / HKG / HPH Ocean Service Overview</h1>
-      <div class="subtitle">Yantian (CNYTN) Â· Shekou (CNSHK) Â· Hai Phong (VNHPH) â up to 5 services per lane, direct &amp; transfer</div>
+      <div class="subtitle">Yantian (CNYTN) &middot; Shekou (CNSHK) &middot; Hai Phong (VNHPH) &mdash; top 5 services per lane, direct &amp; transfer</div>
     </div>
-  </div>
-  <div class="updated">Last updated: April 13, 2026 Â· Source: Flexport Atlas</div>
-  <div class="tldr">
-    <div class="tldr-item"><strong>3 POLs</strong> Â· 14 trade lanes</div>
-    <div class="tldr-item"><strong>CNSHK â CNYTN</strong> â same port cluster, ~15 min truck</div>
-    <div class="tldr-item"><strong>VNHPH</strong> â Hai Phong, Vietnam (remaining lanes loading)</div>
-    <div class="tldr-item"><strong>Transit days</strong> = carrier published time from Atlas</div>
+    <div class="updated">Last updated: April 13, 2026<br>Source: Flexport Atlas</div>
   </div>
 </div>
 
-<div class="legend">
-  <span class="badge direct">â Direct</span>
-  <span class="badge transfer">â 1 Transfer</span>
-  <span class="badge ytn">CNYTN</span>
-  <span class="badge shk">CNSHK</span>
-  <span class="badge hph">VNHPH</span>
-  <span class="leg-sep">Multi-leg services shown as <span style="font-family:monospace;font-size:10px;background:rgba(1,95,116,0.1);padding:1px 5px;border-radius:3px;">SVC1 â SVC2</span></span>
+<div class="meta-bar">
+  <div class="meta-inner">
+    <div class="meta-item"><strong>3 POLs</strong> &middot; 14 trade lanes</div>
+    <div class="meta-item"><strong>CNSHK &asymp; CNYTN</strong> &mdash; same port cluster, ~15 min truck</div>
+    <div class="meta-item"><strong>VNHPH</strong> &mdash; Hai Phong, Vietnam (remaining lanes loading)</div>
+    <div class="meta-item"><strong>Transit days</strong> = carrier published time from Atlas</div>
+  </div>
+</div>
+
+<div class="key-bar">
+  <div class="key-inner">
+    <span class="key-label">Key</span>
+    <div class="key-items">
+      <span class="badge direct">&#11044; Direct</span>
+      <span class="badge transfer">&#11044; 1 Transfer</span>
+      <span class="badge pol-ytn">CNYTN</span>
+      <span class="badge pol-shk">CNSHK</span>
+      <span class="badge pol-hph">VNHPH</span>
+    </div>
+    <span class="key-note">Multi-leg: <code>SVC1 &rarr; SVC2</code></span>
+  </div>
 </div>
 
 <div class="container">
 
-  <!-- ââ INTRA-ASIA ââ -->
   <div class="section-title">Intra-Asia</div>
   <div class="lanes">
-
-    <!-- Japan Tokyo -->
     <div class="lane-card">
       <div class="lane-header">
-        <div class="lane-title">
-          <span class="flag">ð¯ðµ</span>
-          <div>
-            <div class="lane-name">Tokyo / Yokohama</div>
-            <span class="locode">JPTYO</span>
-          </div>
-        </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:JPTYO" target="_blank">Atlas â</a>
+        <div class="lane-title"><span class="flag">&#127471;&#127477;</span><div><div class="lane-name">Tokyo / Yokohama</div><span class="locode">JPTYO</span></div></div>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:JPTYO" target="_blank">Atlas &nearr;</a>
       </div>
-      <table>
-        <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead>
-        <tbody>
-          <tr><td class="rank">1</td><td class="svc">NSC</td><td class="days">4</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">JCT / JTXCNC</td><td class="days">5</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr><td class="rank">3</td><td class="svc">JTS</td><td class="days">5</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr><td class="rank">4</td><td class="svc">KTX3</td><td class="days">5</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr><td class="rank">5</td><td class="svc">CTJ</td><td class="days">6</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
-          <tr><td class="rank">1</td><td class="svc">JVH / JVHCNC</td><td class="days">6</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">JCV</td><td class="days">8</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">3</td><td class="svc">HTW â JPI / JPI1CNC</td><td class="days">8</td><td><span class="badge transfer">1 Transfer</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">4</td><td class="svc">JTP â NSC</td><td class="days">9</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">CNSHK</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">5</td><td class="svc">NCHH2</td><td class="days">10</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-        </tbody>
-      </table>
+      <table><thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead><tbody>
+        <tr><td class="rank">1</td><td class="svc">JSH / NSA</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+        <tr><td class="rank">2</td><td class="svc">JS3 / KTX4 / JH2</td><td class="days">4</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+        <tr class="pol-section hph"><td colspan="6">&#127475;&#127475; Haiphong (VNHPH)</td></tr>
+        <tr><td class="rank">1</td><td class="svc">JH2</td><td class="days">6</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr><td class="rank">2</td><td class="svc">HTW &rarr; JTH</td><td class="days">7</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWTPE</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr><td class="rank">3</td><td class="svc">NCHH1</td><td class="days">8</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr><td class="rank">4</td><td class="svc">JH2 &rarr; JSH</td><td class="days">8</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">CNSHK</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr><td class="rank">5</td><td class="svc">JTP &rarr; NSA</td><td class="days">8</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">CNSHK</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+      </tbody></table>
     </div>
-
-    <!-- Japan Osaka/Kobe -->
     <div class="lane-card">
       <div class="lane-header">
-        <div class="lane-title">
-          <span class="flag">ð¯ðµ</span>
-          <div>
-            <div class="lane-name">Osaka / Kobe</div>
-            <span class="locode">JPOSA</span>
-          </div>
-        </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:JPOSA" target="_blank">Atlas â</a>
+        <div class="lane-title"><span class="flag">&#127472;&#127479;</span><div><div class="lane-name">Busan</div><span class="locode">KRPUS</span></div></div>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:KRPUS" target="_blank">Atlas &nearr;</a>
       </div>
-      <table>
-        <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead>
-        <tbody>
-          <tr><td class="rank">1</td><td class="svc">JSH / NSA</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">JS3 / KTX4 / JH2</td><td class="days">4</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
-          <tr><td class="rank">1</td><td class="svc">JH2</td><td class="days">6</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">HTW â JTH</td><td class="days">7</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWTPE</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">3</td><td class="svc">NCHH1</td><td class="days">8</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">4</td><td class="svc">JH2 â JSH</td><td class="days">8</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">CNSHK</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">5</td><td class="svc">JTP â NSA</td><td class="days">8</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">CNSHK</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-        </tbody>
-      </table>
+      <table><thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead><tbody>
+        <tr><td class="rank">1</td><td class="svc">TP20</td><td class="days">1</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr><td class="rank">2</td><td class="svc">KC2 / KCS / NFS</td><td class="days">2</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+        <tr><td class="rank">3</td><td class="svc">CMI3 / KCI / RCI03</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+        <tr><td class="rank">4</td><td class="svc">FP2 / GRIFFIN</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr><td class="rank">5</td><td class="svc">KCI</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+        <tr class="pol-section hph"><td colspan="6">&#127475;&#127475; Haiphong (VNHPH)</td></tr>
+        <tr><td class="rank">1</td><td class="svc">HPX / RNV3</td><td class="days">2</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr><td class="rank">2</td><td class="svc">DOLPHIN</td><td class="days">6</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr><td class="rank">3</td><td class="svc">FP2 / GRIFFIN</td><td class="days">6</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr><td class="rank">4</td><td class="svc">FS1 / KCM3 / KCS / KCX</td><td class="days">6</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr><td class="rank">5</td><td class="svc">HP2</td><td class="days">7</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+      </tbody></table>
     </div>
-
-    <!-- Korea Busan -->
     <div class="lane-card">
       <div class="lane-header">
-        <div class="lane-title">
-          <span class="flag">ð°ð·</span>
-          <div>
-            <div class="lane-name">Busan</div>
-            <span class="locode">KRPUS</span>
-          </div>
-        </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:KRPUS" target="_blank">Atlas â</a>
+        <div class="lane-title"><span class="flag">&#127480;&#127468;</span><div><div class="lane-name">Singapore</div><span class="locode">SGSIN</span></div></div>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:SGSIN" target="_blank">Atlas &nearr;</a>
       </div>
-      <table>
-        <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead>
-        <tbody>
-          <tr><td class="rank">1</td><td class="svc">TP20</td><td class="days">1</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">KC2 / KCS / NFS</td><td class="days">2</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr><td class="rank">3</td><td class="svc">CMI3 / KCI / RCI03</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr><td class="rank">4</td><td class="svc">FP2 / GRIFFIN</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">5</td><td class="svc">KCI</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
-          <tr><td class="rank">1</td><td class="svc">HPX / RNV3</td><td class="days">2</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">DOLPHIN</td><td class="days">6</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">3</td><td class="svc">FP2 / GRIFFIN</td><td class="days">6</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">4</td><td class="svc">FS1 / KCM3 / KCS / KCX</td><td class="days">6</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">5</td><td class="svc">HP2</td><td class="days">7</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-        </tbody>
-      </table>
+      <table><thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead><tbody>
+        <tr><td class="rank">1</td><td class="svc">CWS</td><td class="days">1</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+        <tr><td class="rank">2</td><td class="svc">AEU1 / FAL5 / LL1 / NE1</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr><td class="rank">3</td><td class="svc">AEU9 / CES / FAL8 / LL7</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr><td class="rank">4</td><td class="svc">AEU9 t / CES / FAL8 / LL7</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr><td class="rank">5</td><td class="svc">AEU5 t / CEM / FAL6 / LL6</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr class="pol-section hph"><td colspan="6">&#127475;&#127475; Haiphong (VNHPH)</td></tr>
+        <tr><td class="rank">1</td><td class="svc">HSF1CNC / NVS</td><td class="days">4</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr><td class="rank">2</td><td class="svc">NVS</td><td class="days">4</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr><td class="rank">3</td><td class="svc">CCS</td><td class="days">4</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr><td class="rank">4</td><td class="svc">SE8</td><td class="days">4</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr><td class="rank">5</td><td class="svc">SEASIA10</td><td class="days">5</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+      </tbody></table>
     </div>
-
-    <!-- Singapore -->
-    <div class="lane-card">
-      <div class="lane-header">
-        <div class="lane-title">
-          <span class="flag">ð¸ð¬</span>
-          <div>
-            <div class="lane-name">Singapore</div>
-            <span class="locode">SGSIN</span>
-          </div>
-        </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:SGSIN" target="_blank">Atlas â</a>
-      </div>
-      <table>
-        <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead>
-        <tbody>
-          <tr><td class="rank">1</td><td class="svc">CWS</td><td class="days">1</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">AEU1 / FAL5 / LL1 / NE1</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">3</td><td class="svc">AEU9 / CES / FAL8 / LL7</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">4</td><td class="svc">AEU9 / CES / FAL8 / LL7</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">5</td><td class="svc">AEU5 / CEM / FAL6 / LL6</td><td class="days">3</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
-          <tr><td class="rank">1</td><td class="svc">HSF1CNC / NVS</td><td class="days">4</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">NVS</td><td class="days">4</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">3</td><td class="svc">CCS</td><td class="days">4</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">4</td><td class="svc">SE8</td><td class="days">4</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">5</td><td class="svc">SEASIA10</td><td class="days">5</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-
   </div>
 
-  <!-- ââ INDIAN SUBCONTINENT ââ -->
   <div class="section-title">Indian Subcontinent</div>
   <div class="lanes">
-
-    <!-- India Chennai/Madras -->
     <div class="lane-card">
       <div class="lane-header">
-        <div class="lane-title">
-          <span class="flag">ð®ð³</span>
-          <div>
-            <div class="lane-name">Chennai / Madras</div>
-            <span class="locode">INMAA</span>
-          </div>
-        </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:INMAA" target="_blank">Atlas â</a>
+        <div class="lane-title"><span class="flag">&#127470;&#127475;</span><div><div class="lane-name">Chennai / Madras</div><span class="locode">INMAA</span></div></div>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:INMAA" target="_blank">Atlas &nearr;</a>
       </div>
-      <table>
-        <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead>
-        <tbody>
-          <tr><td class="rank">1</td><td class="svc">FIE</td><td class="days">8</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">CI7</td><td class="days">9</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr><td class="rank">3</td><td class="svc">CI7</td><td class="days">10</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr><td class="rank">4</td><td class="svc">CCX / CI3 / FCE / FCS2 / IC3</td><td class="days">11</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr><td class="rank">5</td><td class="svc">CCS</td><td class="days">12</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
-          <tr><td class="rank">1</td><td class="svc">CI7</td><td class="days">11</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">CCS â CVI</td><td class="days">13</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">SGSIN</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">3</td><td class="svc">CJV2 â FIE</td><td class="days">13</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">CNSHK</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">4</td><td class="svc">CI7 â CI7</td><td class="days">14</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">MYPKG</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">5</td><td class="svc">CI7 â CI3</td><td class="days">14</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">MYPKG</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-        </tbody>
-      </table>
+      <table><thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead><tbody>
+        <tr><td class="rank">1</td><td class="svc">FIE</td><td class="days">8</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+        <tr><td class="rank">2</td><td class="svc">CI7</td><td class="days">9</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+        <tr><td class="rank">3</td><td class="svc">CI7</td><td class="days">10</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+        <tr><td class="rank">4</td><td class="svc">CCX / CI3 / FCE / FCS2 / IC3</td><td class="days">11</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+        <tr><td class="rank">5</td><td class="svc">CCS</td><td class="days">12</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+        <tr class="pol-section hph"><td colspan="6">&#127475;&#127475; Haiphong (VNHPH)</td></tr>
+        <tr><td class="rank">1</td><td class="svc">CI7</td><td class="days">11</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr><td class="rank">2</td><td class="svc">CCS &rarr; CVI</td><td class="days">13</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">SGSIN</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr><td class="rank">3</td><td class="svc">CJV2 &rarr; FIEhph"><td colspan="6">&#127475;&#127475; Haiphong (VNHPH)</td></tr>
+        <tr><td class="rank">1</td><td class="svc">CI7</td><td class="days">11</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr><td class="rank">2</td><td class="svc">CCS &rarr; CVI</td><td class="days">13</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">SGSIN</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr><td class="rank">3</td><td class="svc">CJV2 &rarr; FIE</td><td class="days">13</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">CNSHK</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr><td class="rank">4</td><td class="svc">CI7 &rarr; CI7</td><td class="days">14</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">CNSHK</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr><td class="rank">5</td><td class="svc">CCS &rarr; CI7</td><td class="days">14</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">CNSHK</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+      </tbody></table>
     </div>
-
-    <!-- India Nhava Sheva -->
     <div class="lane-card">
       <div class="lane-header">
-        <div class="lane-title">
-          <span class="flag">ð®ð³</span>
-          <div>
-            <div class="lane-name">Nhava Sheva / Mumbai</div>
-            <span class="locode">INNSA</span>
-          </div>
-        </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:INNSA" target="_blank">Atlas â</a>
+        <div class="lane-title"><span class="flag">&#127470;&#127475;</span><div><div class="lane-name">Mumbai / NHep¼/div><span class="locode">INBOM</span></div></div>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:INBOM" target="_blank">Atlas &nearr;</a>
       </div>
-      <table>
-        <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead>
-        <tbody>
-          <tr><td class="rank">1</td><td class="svc">CWS</td><td class="days">8</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">FIM</td><td class="days">11</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">3</td><td class="svc">RKI2</td><td class="days">12</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">4</td><td class="svc">CWS â CWS</td><td class="days">12</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">SGSIN</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">5</td><td class="svc">AS1</td><td class="days">13</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH) â partial data</td></tr>
-          <tr><td class="rank">1</td><td class="svc">IQH â CWS</td><td class="days">13</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">CNSHK</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">AMERICA â SHIKRA</td><td class="days">15</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">SGSIN</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
-          <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:INNSA" target="_blank">More Haiphong services â Atlas â</a></td></tr>
-        </tbody>
-      </table>
+      <table><thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead><tbody>
+        <tr><td class="rank">1</td><td class="svc">INDI1 / MW</td><td class="days">12</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+        <tr><td class="rank">2</td><td class="svc">CI7</td><td class="days">13</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+        <tr><td class="rank">3</td><td class="svc">IA2 / IAL / MWS / SCW</td><td class="days">13</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+        <tr><td class="rank">4</td><td class="svc">CAPI / SCW</td><td class="days">13</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+        <tr><td class="rank">5</td><td class="svc">CCX / CI3 / FCE / FCS2 / IC3</td><td class="days">14</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+        <tr class="pol-section hph"><td colspan="6">&#127475;&#127475; Haiphong (VNHPH)</td></tr>
+        <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:INBOM" target="_blank">Check Haiphong services â Atlas â</a></td></tr>
+      </tbody></table>
     </div>
-
   </div>
 
-  <!-- ââ US WEST COAST ââ -->
+  <div class="section-title">Middle East &amp; East Africa</div>
+  <div class="lanes">
+    <div class="lane-card">
+      <div class="lane-header">
+        <div class="lane-title"><span class="flag">&#127461;&#127475;</span><div><div class="lane-name">Dubai / Jebel Ali</div><span class="locode">AEJEA</span></div></div>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:AEJEA" target="_blank">Atlas &nearr;</a>
+      </div>
+      <table><thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead><tbody>
+        <tr><td class="rank">1</td><td class="svc">ME1 / PCW</td><td class="days">14</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr><td class="rank">2</td><td class="svc">MEC / MEX2</td><td class="days">14</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr><td class="rank">3</td><td class="svc">ME3 / SCS</td><td class="days">14</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr><td class="rank">4</td><td class="svc">ME2 / MEC2 / MEX2 / PCW2</td><td class="days">14</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr><td class="rank">5</td><td class="svc">MEC2 / MEX2 / PCW2</td><td class="days">14</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr class="pol-section hph"><td colspan="6">&#127475;&#127475; Haiphong (VNHPH)</td></tr>
+        <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:AEJEAnsfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">MYPKG</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr><td class="rank">5</td><td class="svc">CI7 &rarr; CI3</td><td class="days">14</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">MYPKG</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+      </tbody></table>
+    </div>
+    <div class="lane-card">
+      <div class="lane-header">
+        <div class="lane-title"><span class="flag">&#127470;&#127475;</span><div><div class="lane-name">Nhava Sheva / Mumbai</div><span class="locode">INNSA</span></div></div>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:INNSA" target="_blank">Atlas &nearr;</a>
+      </div>
+      <table><thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead><tbody>
+        <tr><td class="rank">1</td><td class="svc">CWS</td><td class="days">8</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr><td class="rank">2</td><td class="svc">FIM</td><td class="days">11</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr><td class="rank">3</td><td class="svc">RKI2</td><td class="days">12</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr><td class="rank">4</td><td class="svc">CWS &rarr; CWS</td><td class="days">12</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">SGSIN</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr><td class="rank">5</td><td class="svc">AS1</td><td class="days">13</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr class="pol-section hph"><td colspan="6">&#127475;&#127475; Haiphong (VNHPH) &mdash; partial data</td></tr>
+        <tr><td class="rank">1</td><td class="svc">IQH &rarr; CWS</td><td class="days">13</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">CNSHK</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr><td class="rank">2</td><td class="svc">AMERICA &rarr; SHIKRA</td><td class="days">15</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">SGSIN</span></td><td><span class="origin-tag origin-hph">VNHPH</span></td></tr>
+        <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:INNSA" target="_blank">More Haiphong services &rarr; Atlas &nearr;</a></td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
   <div class="section-title">US West Coast</div>
   <div class="lanes">
-
-    <!-- US Oakland -->
     <div class="lane-card">
       <div class="lane-header">
-        <div class="lane-title">
-          <span class="flag">ðºð¸</span>
-          <div>
-            <div class="lane-name">Oakland</div>
-            <span class="locode">USOAK</span>
-          </div>
-        </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USOAK" target="_blank">Atlas â</a>
+        <div class="lane-title"><span class="flag">&#127482;&#127480;</span><div><div class="lane-name">Oakland</div><span class="locode">USOAK</span></div></div>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USOAK" target="_blank">Atlas &nearr;</a>
       </div>
-      <table>
-        <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Arr.</th></tr></thead>
-        <tbody>
-          <tr><td class="rank">1</td><td class="svc">JAX / Pendulum-Loop-1</td><td class="days">19</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="arr-tag">USOAK</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">JAX / Pendulum-Loop-1</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="arr-tag">USOAK</span></td></tr>
-          <tr><td class="rank">3</td><td class="svc">JAX / Pendulum-Loop-1</td><td class="days">20</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USOAK</span></td></tr>
-          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
-          <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:USOAK" target="_blank">Check Haiphong services â Atlas â</a></td></tr>
-        </tbody>
-      </table>
+      <table><thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Arr.</th></tr></thead><tbody>
+        <tr><td class="rank">1</td><td class="svc">JAX / Pendulum-Loop-1</td><td class="days">19</td><td><span class="badge transfer">1 Transfer</span></td><td classia-tags"><span class="via-tag">TWKHH</span></td><td><span class="arr-tag">USOAK</span></td></tr>
+        <tr><td class="rank">2</td><td class="svc">JAX / Pendulum-Loop-1</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="arr-tag">USOAK</span></td></tr>
+        <tr><td class="rank">3</td><td class="svc">JAX / Pendulum-Loop-1</td><td class="days">20</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USOAK</span></td></tr>
+        <tr class="pol-section hph"><td colspan="6">&#127475;&#127475; Haiphong (VNHPH)</td></tr>
+        <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:USOAK" target="_blank">Check Haiphong services &rarr; Atlas &nearr;</a></td></tr>
+      </tbody></table>
     </div>
-
-    <!-- US Los Angeles -->
     <div class="lane-card">
       <div class="lane-header">
-        <div class="lane-title">
-          <span class="flag">ðºð¸</span>
-          <div>
-            <div class="lane-name">Los Angeles</div>
-            <span class="locode">USLAX</span>
-          </div>
-        </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USLAX" target="_blank">Atlas â</a>
+        <div class="lane-title"><span class="flag">&#127482;&#127480;</span><div><div class="lane-name">Los Angeles</div><span class="locode">USLAX</span></div></div>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USLAX" target="_blank">Atlas &nearr;</a>
       </div>
-      <table>
-        <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Arr.</th></tr></thead>
-        <tbody>
-          <tr><td class="rank">1</td><td class="svc">ZEX</td><td class="days">13</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">JAX / Pendulum-Loop-1</td><td class="days">14</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
-          <tr><td class="rank">3</td><td class="svc">PSX</td><td class="days">14</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
-          <tr><td class="rank">4</td><td class="svc">CP2 / PVCS / SCS / SEA</td><td class="days">15</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
-          <tr><td class="rank">5</td><td class="svc">AAS3 / CP4 / GEX / HTW / PCS</td><td class="days">15</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAT</span></td></tr>
-          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
-          <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:USLAX" target="_blank">Check Haiphong services â Atlas â</a></td></tr>
-        </tbody>
-      </table>
+      <table><thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Arr.</th></tr></thead><tbody>
+        <tr><td class="rank">1</td><td class="svc">ZEX</td><td class="days">13</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
+        <tr><td class="rank">2</td><td class="svc">JAX / Pendulum-Loop-1</td><td class="days">14</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
+        <tr><td class="rank">3</td><td class="svc">PSX</td><td class="days">14</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
+        <tr><td class="rank">4</td><td class="svc">CP2 / PVCS / SCS / SEA</td><td class="days">15</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
+        <tr><td class="rank">5</td><td class="svc">AAS3 / CP4 / GEX / HTW / PCS</td><td class="days">15</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
+        <tr class="pol-section hph"><td colspan="6">&#127475;&#127475; Haiphong (VNHPH)</td></tr>
+        <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:USLAX" target="_blank">Check Haiphong services &rarr; Atlas &nearr;</a></td></tr>
+      </tbody></table>
     </div>
-
-    <!-- US Long Beach -->
     <div class="lane-card">
       <div class="lane-header">
-        <div class="lane-title">
-          <span class="flag">ðºð¸</span>
-          <div>
-            <div class="lane-name">Long Beach</div>
-            <span class="locode">USLGB</span>
-          </div>
-        </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USLGB" target="_blank">Atlas â</a>
+        <div class="lane-title"><span class="flag">&#127482;&#127480;</span><div><div class="lane-name">Long Beach</div><span class="locode">USLGB</span></div></div>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USLGB" target="_blank">Atlas &nearr;</a>
       </div>
-      <table>
-        <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Arr.</th></tr></thead>
-        <tbody>
-          <tr><td class="rank">1</td><td class="svc">ZEX</td><td class="days">13</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">JAX / Pendulum-Loop-1</td><td class="days">14</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
-          <tr><td class="rank">3</td><td class="svc">PSX</td><td class="days">14</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
-          <tr><td class="rank">4</td><td class="svc">CP2 / PVCS / SCS / SEA</td><td class="days">15</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLGB</span></td></tr>
-          <tr><td class="rank">5</td><td class="svc">AAS3 / CP4 / GEX / HTW / PCS</td><td class="days">15</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLGB</span></td></tr>
-          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
-          <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:USLGB" target="_blank">Check Haiphong services â Atlas â</a></td></tr>
-        </tbody>
-      </table>
+      <table><thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Arr.</th></tr></thead><tbody>
+        <tr><td class="rank">1</td><td class="svc">ZEX</td><td class="days">13</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
+        <tr><td class="rank">2</td><td class="svc">JAX / Pendulum-Loop-1</td><td class="days">14</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
+        <tr><td class="rank">3</td><td class="svc">PSX</td><td class="days">14</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
+        <tr><td class="rank">4</td><td class="svc">CP2 / PVCS / SCS / SEA</td><td class="days">15</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLAX</span></td></tr>
+        <tr><td class="rank">5</td><td class="svc">AAS3 / CP4 / GEX / HTW / PCS</td><td class="days">15</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USLGB</span></td></tr>
+        <tr class="pol-section hph"><td colspan="6">&#127475;&#127475; Haiphong (VNHPH)</td></tr>
+        <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:USLGB" target="_blank">Check Haiphong services &rarr; Atlas &nearr;</a></td></tr>
+      </tbody></table>
     </div>
-
   </div>
 
-  <!-- ââ US EAST COAST & INLAND ââ -->
   <div class="section-title">US East Coast &amp; Inland</div>
   <div class="lanes">
-
-    <!-- US New York -->
     <div class="lane-card">
       <div class="lane-header">
-        <div class="lane-title">
-          <span class="flag">ðºð¸</span>
-          <div>
-            <div class="lane-name">New York / New Jersey</div>
-            <span class="locode">USNYC</span>
-          </div>
-        </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USNYC" target="_blank">Atlas â</a>
+        <div class="lane-title"><span class="flag">&#127482;&#127480;</span><div><div class="lane-name">New York / New Jersey</div><span class="locode">USNYC</span></div></div>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USNYC" target="_blank">Atlas &nearr;</a>
       </div>
-      <table>
-        <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Arr.</th></tr></thead>
-        <tbody>
-          <tr><td class="rank">1</td><td class="svc">TP20</td><td class="days">30</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USNYC</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">AWE4 / ECX1 / SAX â AUE</td><td class="days">30</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">PAONX</span></td><td><span class="arr-tag">USNYC</span></td></tr>
-          <tr><td class="rank">3</td><td class="svc">AWE4 / ECX1 / SAX</td><td class="days">31</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USNYC</span></td></tr>
-          <tr><td class="rank">4</td><td class="svc">AEU9 â INDAMEX</td><td class="days">33</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">LKCMB</span></td><td><span class="arr-tag">USNYC</span></td></tr>
-          <tr><td class="rank">5</td><td class="svc">TP20 â 712</td><td class="days">33</td><td><span class="badge transfer">1 Transfer</span></td><td></td><td><span class="arr-tag">USNYC</span></td></tr>
-          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
-          <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:USNYC" target="_blank">Check Haiphong services â Atlas â</a></td></tr>
-        </tbody>
-      </table>
+      <table><thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Arr.</th></tr></thead><tbody>
+        <tr><td class="rank">1</td><td class="svc">TP20</td><td class="days">30</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USNYC</span></td></tr>
+        <tr><td class="rank">2</td><td class="svc">AWE4 / ECX1 / SAX &rarr; AUE</td><td class="days">30</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">PAONX</span></td><td><span class="arr-tag">USNYC</span></td></tr>
+        <tr><td class="rank">3</td><td class="svc">AWE4 / ECX1 / SAX</td><td class="days">31</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">USNYC</span></td></tr>
+        <tr><td class="rank">4</td><td class="svc">AEU9 &rarr; INDAMEX</td><td class="days">33</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">LKCMB</span></td><td><span class="arr-tag">USNYC</span></td></tr>
+        <tr><td class="rank">5</td><td class="svc">TP20 &rarr; 712</td><td class="days">33</td><td><span class="badge transfer">1 Transfer</span></td><td></td><td><span class="arr-tag">USNYC</span></td></tr>
+        <tr class="pol-section hph"><td colspan="6">&#127475;&#127475; Haiphong (VNHPH)</td></tr>
+        <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:USNYC" target="_blank">Check Haiphong services &rarr; Atlas &nearr;</a></td></tr>
+      </tbody></table>
     </div>
-
-    <!-- Canada Vancouver -->
     <div class="lane-card">
       <div class="lane-header">
-        <div class="lane-title">
-          <span class="flag">ð¨ð¦</span>
-          <div>
-            <div class="lane-name">Vancouver</div>
-            <span class="locode">CAVAN</span>
-          </div>
-        </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:CAVAN" target="_blank">Atlas â</a>
+        <div class="lane-title"><span class="flag">&#127464;&#127462;</span><div><div class="lane-name">Vancouver</div><span class="locode">CAVAN</span></div></div>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:CAVAN" target="_blank">Atlas &nearr;</a>
       </div>
-      <table>
-        <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Arr.</th></tr></thead>
-        <tbody>
-          <tr><td class="rank">1</td><td class="svc">DAS / OPNW / PNW1</td><td class="days">17</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">CAVAN</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">PVCS / SCS / SEA</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="arr-tag">CAVAN</span></td></tr>
-          <tr><td class="rank">3</td><td class="svc">PVCS / PNW1</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="arr-tag">CAVAN</span></td></tr>
-          <tr><td class="rank">4</td><td class="svc">DAS / OPNW / PNW1</td ><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="arr-tag">CAVAN</span></td></tr>
-          <tr><td class="rank">5</td><td class="svc">CAT / PNW1</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="arr-tag">CAVAN</span></td></tr>
-          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
-          <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:CAVAN" target="_blank">Check Haiphong services â Atlas â</a></td></tr>
-        </tbody>
-      </table>
+      <table><thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Arr.</th></tr></thead><tbody>
+        <tr><td class="rank">1</td><td class="svc">DAS / OPNW / PNW1</td><td class="days">17</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="arr-tag">CAVAN</span></td></tr>
+        <tr><td class="rank">2</td><td class="svc">PVCS / SCS / SEA</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="arr-tag">CAVAN</span></td></tr>
+        <tr><td class="rank">3</td><td class="svc">PVCS / PNW1</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="arr-tag">CAVAN</span></td></tr>
+        <tr><td class="rank">4</td><td class="svc">DAS / OPNW / PNW1</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="arr-tag">CAVAN</span></td></tr>
+        <tr><td class="rank">5</td><td class="svc">CAT / PNW1</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="arr-tag">CAVAN</span></td></tr>
+        <tr class="pol-section hph"><td colspan="6">&#127475;&#127475; Haiphong (VNHPH)</td></tr>
+        <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:CAVAN" target="_blank">Check Haiphong services &rarr; Atlas &nearr;</a></td></tr>
+      </tbody></table>
     </div>
-
-    <!-- US Chicago -->
     <div class="lane-card">
       <div class="lane-header">
-        <div class="lane-title">
-          <span class="flag">ðºð¸</span>
-          <div>
-            <div class="lane-name">Chicago</div>
-            <span class="locode">USCHI</span>
-          </div>
-        </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USCHI" target="_blank">Atlas â</a>
+        <div class="lane-title"><span class="flag">&#127482;&#127480;</span><div><div class="lane-name">Chicago</div><span class="locode">USCHI</span></div></div>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:USCHI" target="_blank">Atlas &nearr;</a>
       </div>
-      <div class="no-route">No direct ocean routing â Chicago is served via inland intermodal from USLAX / USNYC. Check Atlas for rail/truck options.</div>
+      <div class="no-route">No direct ocean routing &mdash; Chicago is served via inland intermodal from USLAX / USNYC. Check Atlas for rail/truck options.</div>
     </div>
-
   </div>
 
-  <!-- ââ EUROPE ââ -->
   <div class="section-title">Europe</div>
   <div class="lanes">
-
-    <!-- Netherlands Rotterdam -->
     <div class="lane-card">
       <div class="lane-header">
-        <div class="lane-title">
-          <span class="flag">ð³ð±</span>
-          <div>
-            <div class="lane-name">Rotterdam</div>
-            <span class="locode">NLRTM</span>
-          </div>
-        </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:NLRTM" target="_blank">Atlas â</a>
+        <div class="lane-title"><span class="flag">&#127475;&#127473;</span><div><div class="lane-name">Rotterdam</div><span class="locode">NLRTM</span></div></div>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:NLRTM" target="_blank">Atlas &nearr;</a>
       </div>
-      <table>
-        <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead>
-        <tbody>
-          <tr><td class="rank">1</td><td class="svc">FAL8 â NEWMO</td><td class="days">28</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">LKCMB</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">FAL8 â NEWMO</td><td class="days">30</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">LKCMB</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">3</td><td class="svc">OGEU</td><td class="days">31</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">4</td><td class="svc">AEU5 / CEM / FAL6 / LL6</td><td class="days">31</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">5</td><td class="svc">CIX â NEWMO</td><td class="days">31</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">LKCMB</span></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
-          <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:NLRTM" target="_blank">Check Haiphong services â Atlas â</a></td></tr>
-        </tbody>
-      </table>
+      <table><thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead><tbody>
+        <tr><td class="rank">1</td><td class="svc">FAL8 &rarr; NEWMO</td><td class="days">28</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">LKCMB</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr><td class="rank">2</td><td class="svc">FAL8 &rarr; NEWMO</td><td class="days">30</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">LKCMB</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr><td class="rank">3</td><td class="svc">OGEU</td><td class="days">31</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr><td class="rank">4</td><td class="svc">AEU5 / CEM / FAL6 / LL6</td><td class="days">31</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr><td class="rank">5</td><td class="svc">CIX &rarr; NEWMO</td><td class="days">31</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">LKCMB</span></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+        <tr class="pol-section hph"><td colspan="6">&#127475;&#127475; Haiphong (VNHPH)</td></tr>
+        <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:NLRTM" target="_blank">Check Haiphong services &rarr; Atlas &nearr;</a></td></tr>
+      </tbody></table>
     </div>
-
   </div>
 
-  <!-- ââ OCEANIA ââ -->
   <div class="section-title">Oceania</div>
   <div class="lanes">
-
-    <!-- New Zealand Auckland -->
     <div class="lane-card">
       <div class="lane-header">
-        <div class="lane-title">
-          <span class="flag">ð³ð¿</span>
-          <div>
-            <div class="lane-name">Auckland</div>
-            <span class="locode">NZAKL</span>
-          </div>
-        </div>
-        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:NZAKL" target="_blank">Atlas â</a>
+        <div class="lane-title"><span class="flag">&#127475;&#127487;</span><div><div class="lane-name">Auckland</div><span class="locode">NZAKL</span></div></div>
+        <a class="atlas-link" href="https://atlas.flexport.com/route/originoceanport:CNYTN/destinationoceanport:NZAKL" target="_blank">Atlas &nearr;</a>
       </div>
-      <table>
-        <thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead>
-        <tbody>
-          <tr><td class="rank">1</td><td class="svc">ANZX / ANL / CNS / NCS</td><td class="days">17</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
-          <tr><td class="rank">2</td><td class="svc">PVCS / SCS / SEA â ANZX / ANL / CNS</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">3</td><td class="svc">SEA â CNS</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">4</td><td class="svc">DAS / OPNW / PNW1 â CNS</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr><td class="rank">5</td><td class="svc">KTX3 â CNS</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
-          <tr class="pol-section hph"><td colspan="6">ð»ð³ Haiphong (VNHPH)</td></tr>
-          <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:NZAKL" target="_blank">Check Haiphong services â Atlas â</a></td></tr>
-        </tbody>
-      </table>
+      <table><thead><tr><th>#</th><th>Service</th><th>Days</th><th>Type</th><th>Via</th><th>Origin</th></tr></thead><tbody>
+        <tr><td class="rank">1</td><td class="svc">ANZX / ANL / CNS / NCS</td><td class="days">17</td><td><span class="badge direct">Direct</span></td><td></td><td><span class="origin-tag origin-shk">CNSHK</span></td></tr>
+        <tr><td class="rank">2</td><td class="svc">PVCS / SCS / SEA &rarr; ANZX / ANL / CNS</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr><td class="rank">3</td><td class="svc">SEA &rarr; CNS</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr><td class="rank">4</td><td class="svc">DAS / OPNW / PNW1 &rarr; CNS</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr><td class="rank">5</td><td class="svc">KTX3 &rarr; CNS</td><td class="days">20</td><td><span class="badge transfer">1 Transfer</span></td><td class="via-tags"><span class="via-tag">TWKHH</span></td><td><span class="origin-tag origin-ytn">CNYTN</span></td></tr>
+        <tr class="pol-section hph"><td colspan="6">&#127475;&#127475; Haiphong (VNHPH)</td></tr>
+        <tr class="pending-row"><td colspan="6"><a href="https://atlas.flexport.com/route/originoceanport:VNHPH/destinationoceanport:NZAKL" target="_blank">Check Haiphong services &rarr; Atlas &nearr;</a></td></tr>
+      </tbody></table>
     </div>
-
   </div>
 
 </div>
+
+<div class="page-footer">
+  <img class="footer-logo" src="data:image/png;base64,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" alt="Flexport">
+  <div class="footer-text">YTN / HKG / HPH Ocean Service Overview &middot; Source: Flexport Atlas &middot; April 2026</div>
+</div>
+
 </body>
-</html>
+  </html>
